@@ -1,0 +1,18 @@
+# Minimal example: kafka-ui loading the Apicurio header-mode serde plugin.
+# Build the jar first: `sbt assembly`, then `docker compose up`.
+services:
+  kafka-ui:
+    image: ghcr.io/kafbat/kafka-ui:v1.5.0 # >= v1.5.0 required (headers -> deserializer)
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      # --- custom serde plugin ---
+      KAFKA_CLUSTERS_0_SERDE_0_NAME: ApicurioHeader
+      KAFKA_CLUSTERS_0_SERDE_0_FILEPATH: /serde/ui-serde-apicurio-0.1.0-SNAPSHOT-assembly.jar
+      KAFKA_CLUSTERS_0_SERDE_0_CLASSNAME: io.github.iblislin.uiserde.apicurio.ApicurioHeaderSerde
+      KAFKA_CLUSTERS_0_SERDE_0_PROPERTIES_REGISTRYURL: http://apicurio:8080/apis/registry/v3
+    volumes:
+      # mount the assembled fat-jar into the container
+      - ./../target/scala-3.3.4:/serde:ro
