@@ -15,4 +15,4 @@ services:
       KAFKA_CLUSTERS_0_SERDE_0_PROPERTIES_REGISTRYURL: http://apicurio:8080/apis/registry/v3
     volumes:
       # mount the assembled fat-jar into the container
-      - ./../target/scala-3.3.4:/serde:ro
+      - ./../target/scala-3.3.8:/serde:ro

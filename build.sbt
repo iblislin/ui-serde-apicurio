@@ -1,5 +1,5 @@
 ThisBuild / organization := "io.github.iblislin"
-ThisBuild / scalaVersion := "3.3.4" // LTS
+ThisBuild / scalaVersion := "3.3.8" // LTS
 
 lazy val root = (project in file("."))
   .settings(

@@ -28,7 +28,7 @@ record to JSON itself.
 
 ```bash
 sbt assembly
-# -> target/scala-3.3.4/ui-serde-apicurio-0.1.0-SNAPSHOT-assembly.jar
+# -> target/scala-3.3.8/ui-serde-apicurio-0.1.0-SNAPSHOT-assembly.jar
 ```
 
 `serde-api` is `provided` (kafka-ui supplies it); the fat-jar bundles the Scala stdlib +
