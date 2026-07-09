@@ -38,7 +38,7 @@ import java.util.concurrent.ConcurrentHashMap
 class ApicurioHeaderSerde extends Serde:
   import ApicurioHeaderSerde.readGlobalId
 
-  private var registryUrl: String = uninitialized
+  private var registryUrl: String = null
   private val http                = HttpClient.newHttpClient()
   // globalId -> parsed writer schema (schemas are immutable per id)
   private val schemaCache = ConcurrentHashMap[java.lang.Long, Schema]()
