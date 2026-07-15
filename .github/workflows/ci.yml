@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Cache Coursier / Ivy
+        uses: coursier/cache-action@v6
+
+      - name: Run tests
+        run: sbt -batch test
+
+      - name: Build assembly jar
+        run: sbt -batch assembly
+
+      - name: Upload assembly jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-serde-apicurio-assembly
+          path: target/scala-3.3.8/ui-serde-apicurio-*-assembly.jar
+          if-no-files-found: error
